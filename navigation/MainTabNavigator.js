@@ -4,8 +4,11 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+// import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import SearchScreen from '../screens/SearchScreen';
+import MapScreen from '../screens/MapScreen';
+import AnalysisScreen from '../screens/AnalysisScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -35,21 +38,71 @@ HomeStack.navigationOptions = {
 
 HomeStack.path = '';
 
-const LinksStack = createStackNavigator(
+const SearchStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    Search: SearchScreen,
   },
-  config
+  config,
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+SearchStack.navigationOptions = {
+  tabBarLabel: 'Search',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
-  ),
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios'
+    ? `ios-information-circle${focused ? '' : '-outline'}`
+    : 'md-information-circle'} />
+  )
 };
 
-LinksStack.path = '';
+SearchStack.path = '';
+
+const MapStack = createStackNavigator(
+  {
+    Map: MapScreen,
+  },
+  config,
+);
+
+MapStack.navigationOptions = {
+  tabBarLabel: 'Map',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
+  )
+};
+
+MapStack.path = '';
+
+const AnalysisStack = createStackNavigator(
+  {
+    Analysis: AnalysisScreen,
+  },
+  config,
+);
+
+AnalysisStack.navigationOptions = {
+  tabBarLabel: 'Analysis',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
+  )
+};
+
+AnalysisStack.path = '';
+
+// const LinksStack = createStackNavigator(
+//   {
+//     Links: LinksScreen,
+//   },
+//   config
+// );
+
+// LinksStack.navigationOptions = {
+//   tabBarLabel: 'Links',
+//   tabBarIcon: ({ focused }) => (
+//     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
+//   ),
+// };
+
+// LinksStack.path = '';
 
 const SettingsStack = createStackNavigator(
   {
@@ -69,7 +122,10 @@ SettingsStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
-  LinksStack,
+  // LinksStack,
+  SearchStack,
+  MapStack,
+  AnalysisStack,
   SettingsStack,
 });
 
